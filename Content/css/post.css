@@ -1,0 +1,118 @@
+﻿
+.tweet {
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    overflow:hidden;
+}
+
+    /*.tweet:hover {
+        background-color: #f5f8fa;
+        cursor: pointer;
+    }*/
+
+
+
+#newCommentText {
+    border: none;
+    resize: none;
+    border-radius: 50px;
+    height: 40px;
+    margin-left: 7px;
+    background-color: #f2f3f5;
+}
+
+    #newCommentText:focus {
+        border: none !important;
+        resize: none;
+    }
+
+.tweet-header a {
+    text-decoration: none;
+}
+
+.tweet-userinfo span {
+    font-size: 14px !important;
+}
+
+.tweet-time {
+    font-size: 14px;
+}
+
+    .tweet-time:hover {
+        text-decoration: underline;
+    }
+
+.tweet-userinfo:hover .tweet-fullname {
+    color: #1da1f2;
+    text-decoration: underline;
+}
+
+.tweet-fullname {
+    color: black;
+}
+
+.tweet-username {
+    color: grey;
+    font-weight: normal;
+}
+
+.tweet-time {
+    color: grey;
+}
+
+    .tweet-time:hover {
+        color: #1da1f2;
+    }
+
+    
+.post-like-info a{
+    cursor:pointer;
+}
+
+.tweet-comment-info {
+}
+
+    .tweet-comment-info:hover a {
+        color: #0094ff !important;
+    }
+
+
+.tweet-retweet-info:hover a {
+    color: #4cff00 !important;
+}
+
+
+.tweet-like-info:hover a {
+    color: #ff0000 !important;
+}
+
+.tweet-like-info:active a {
+    color: #ff0000 !important;
+}
+
+.tweet-dm-btn:hover a {
+    color: #0094ff !important;
+}
+
+
+.postfooter-btns {
+    display: flex;
+    flex: 1;
+    border-bottom: solid 1px rgba(0,0,0,.1);
+    padding: 1px 10px 5px 10px;
+    margin-top:-10px;
+}
+
+    .postfooter-btns button {
+        width: 100%;
+        height: 40px;
+        color: #606770;
+        font-weight: bold;
+        background-color: white;
+        border: none;
+    }
+
+    .postfooter-btns button:hover {
+        background-color:#f6f6f7;
+    }

@@ -1,0 +1,224 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+
+
+
+
+<div class="modal" id="imgModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+           
+            <div class="modal-header">
+                <h4 class="modal-title">Position and size your photo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+           
+            <div class="modal-body" id="modalbdy">
+                <img style="height:240px;" src="#" alt="image prev" />
+            </div>
+
+         
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="saveImgId" onclick="saveImg()">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<nav class="navbar navbar-expand-md navbar-light sticky-top bg-white">
+
+    <div class="col-md-3">
+
+        <div class="col-md-3">
+           @if (Model.session.Username == Model.user.Username)
+           {
+               if (Model.user.AvatarImgPath != null)
+               {
+                   <button onclick="openFile()" id="avatarLoad"><img src="~/Content/images/avatars/@Model.user.AvatarImgPath"style="max-width: 200px; max-height: 150px;"/></button>
+               }
+               else
+               {
+                   
+                   
+                       <button onclick="openFile()" id="avatarLoad" class="profileImage"><i class="fas fa-camera"></i></button>
+                       <input style="opacity: 0;position: absolute;z-index: -1;" class="no-image" type="file" name="photo" id="upload-photo" />
+                   
+               }
+           }
+           else
+           {
+               if (Model.user.AvatarImgPath != null)
+               {
+                   <img src="~/Content/images/avatars/@Model.user.AvatarImgPath"style="max-width: 200px; max-height: 150px;"/>
+               }
+               else
+               {
+                <img class="rounded-circle" src="~/Content/images/userp.png" width="150px" height="150px" />
+               }
+           }
+           <p class="profile-username">
+               @Model.user.Fullname
+           </p>
+            
+        </div>
+    </div>
+   
+        
+
+
+        
+
+</nav>
+
+<script>
+
+    $(":button").click(function (event) {
+        if ($(this).hasClass("other-btn-nofriend")) {
+            sendRequest($(this));
+        }
+        else if ($(this).hasClass("other-btn-waitReq")) {
+            removeRequest($(this));
+        }
+        else if ($(this).hasClass("other-btn-friendReq")) {
+            acceptRequest($(this));
+        }
+        else if ($(this).hasClass("other-btn-friend")) {
+            removeFriend($(this));
+        }
+    })
+
+
+    //$(".other-btn-nofriend").click(function () { // sendRequest arkadaş ekle
+    function sendRequest(thisis) {
+        var id = thisis.attr("id");
+        var data = { friendId: id };
+        $.ajax({
+            data: data,
+            method: 'post',
+            url: '/Home/SendFriendRequest',
+            success: function (response) {
+                if (response) {
+                    $(".other-btn-nofriend").addClass("other-btn-waitReq").removeClass("other-btn-nofriend").html("İstek Yollandı");
+
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+    //$(".other-btn-waitReq").click(function () { //removeSendReq istek yollandı
+    function removeRequest(thisis) {
+        var data = { userId: thisis.attr("id") };
+        $.ajax({
+            data: data,
+            method: 'post',
+            url: '/Profile/RemoveSendRequest',
+            success: function (response) {
+                if (response) {
+                    $(".other-btn-waitReq").addClass("other-btn-nofriend").removeClass("other-btn-waitReq").html("Arkadaş Ekle");
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+
+
+    //  $(".other-btn-friendReq").click(function () { // acceptRequest isteği onayla
+    function acceptRequest(thisis) {
+        var data = { userId: thisis.attr("id") };
+        $.ajax({
+            data: data,
+            method: 'post',
+            url: '/Profile/AcceptRequest',
+            success: function (response) {
+                if (response) {
+                    $(".other-btn-friendReq").addClass("other-btn-friend").removeClass("other-btn-friendReq").html("You are friend");
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+    //$(".other-btn-friend").click(function () { //removeFriend arkadaşın
+    function removeFriend(thisis) {
+        var data = { friendId: thisis.attr("id") };
+        $.ajax({
+            data: data,
+            method: 'post',
+            url: '/Profile/RemoveFriend',
+            success: function (response) {
+                if (response) {
+                    $(".other-btn-friend").addClass("other-btn-nofriend").removeClass("other-btn-friend").html("Add Friend");
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+    var ofile;
+
+    function openFile() {
+        if ($('#upload-photo').hasClass("no-image")) {
+            document.getElementById("upload-photo").click();
+        }
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#modalbdy').children('img').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            $('#imgModal').modal('toggle');
+        }
+    }
+
+    function saveImg() {
+        var formdata = new FormData();
+        formdata.append("photo", ofile);
+        $.ajax({
+            data: formdata,
+            method: "post",
+            contentType: false,
+            processData: false,
+            url: "/Profile/SaveAvatar",
+            success: function (state) {
+                if (state) {
+                    
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('#upload-photo').change(function (e) {
+
+            ofile = e.target.files[0];
+            readURL(this)
+
+        });
+    });
+
+
+</script>

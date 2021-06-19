@@ -1,0 +1,30 @@
+﻿@model ParlanceNet.Models.LoginViewModel
+
+<div class="right-box">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "sign-in-form", role = "form" }))
+    {@Html.AntiForgeryToken()
+    <div class="text-danger">@ViewBag.LoginError</div>
+    <div id="login-msg"></div>
+    <div class="input-field">
+        <i class="fas fa-at"></i>
+        @Html.TextBoxFor(m => m.Email, new { type = "email", placeholder = "E-mail", required = "required" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="input-field">
+        <i class="fas fa-lock"></i>
+        @Html.TextBoxFor(m => m.Password, new { type = "password", placeholder = "Password", required = "required" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+    <input type="submit" value="Login" class="btn solid" />
+    <div class="sign-up">
+        <input id="sign-up-btn" type="button" class="btn login" value="Sign Up" />
+
+    </div>
+
+}
+
+
+</div>
+
+

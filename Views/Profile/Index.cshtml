@@ -1,0 +1,20 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="container">
+    <div class="parallax">
+
+    </div>
+
+    <div class="content">
+        @Html.Partial("_PartialMiddleNav", Model)
+
+        <div id="profileBody">
+            @Html.Partial(Model.partialKey, Model)
+        </div>
+    </div>
+</div>

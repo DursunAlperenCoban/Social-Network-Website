@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6430a2af3b024f20a06aa9988bccd299" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="ParlanceDBModel.Chat" Width="1.5" PointX="3" PointY="18.75" />
+        <EntityTypeShape EntityType="ParlanceDBModel.Comment" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="ParlanceDBModel.Friendship" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="ParlanceDBModel.Like" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="ParlanceDBModel.Post" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="ParlanceDBModel.User" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="ParlanceDBModel.Message" Width="1.5" PointX="5.25" PointY="13.125" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Chat_User" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Chat_User1" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Message_Chat" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Comment_Post_PostID" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Comment_User_CommenterID" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Friendship_User" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Friendship_User1" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Like_Post_PostID" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Like_User_OwnerID" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Post_User_OwnerID" />
+        <AssociationConnector Association="ParlanceDBModel.FK_Message_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,204 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="~/Content/css/Layoutmain.css" rel="stylesheet" />
+
+    <link href="~/Content/css/post.css" rel="stylesheet" />
+    <link href="~/Content/css/chatbox.css" rel="stylesheet" />
+    <script src="~/Content/js/dist/browser/signalr.js"></script>
+    <link href="~/Content/css/profile.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div id="requestTemplate" style="display:none;">
+        <div>
+
+            <img src="~/Content/images/userp.png" class="rounded-circle" width="24" height="24" />
+            <p> <button type="button" onclick="" class="btn btn-light ">Accept</button></p>
+            <button type="button" onclick="" class="btn btn-light ">Accept</button>
+            <button type="button" onclick="" class="btn btn-light ">Remove</button>
+        </div>
+        <button type="button" onclick="" class="btn btn-light ">Accept</button>
+    </div>
+
+    <div id="popover-content" style="display:none;">
+
+        <a href="#" onclick="" class="list-group-item">See All</a>
+
+    </div>
+
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light fixed-top custom-nav" style="background-color: #7DCEA0;height: 49px">
+                <div class="container-fluid" style="height:100%;">
+                    <div class="col-md-10" style="height:100%;">
+                        <div class="container" style="height:100%;padding-left:-10px;">
+                            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                                <div class="navbar-nav mr-auto">
+                                    <div class="row" style="text-align:center">
+                                        <a class="nav-link" href="/Home/Index" style="margin-top: -.3rem;">
+                                            <i style="color:white" class="fab fa-earlybirds fa-2x"></i> <span class="sr-only">(current)</span>
+                                        </a>
+
+                                        <div class="input-group mb-3" style="min-width: 300px;max-width: 900px; width:80%; height:30px;margin-top: .3rem;">
+                                            <input type="text" class="form-control" style="height:29px" placeholder="Ara">
+                                            <div class="input-group-append">
+                                                <button style="height:29px;display:flex;background-color:#f5f6f7;" class="btn" type="submit"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form class="form-inline my-2 my-lg-0 search-size"></form>
+
+                                <div style="display:flex;padding:10px;text-align:center;" class="justify-content-end">
+                                    <div class="main-nav-item">
+                                        @if (Model.session.AvatarImgPath != null)
+                                        {
+                                            <img class="rounded-circle" src="~/Content/images/avatars/@Model.session.AvatarImgPath" width="24" height="24" />
+                                        }
+                                        else
+                                        {
+                                            <img class="rounded-circle" src="~/Content/images/userp.png" width="24" height="24" />
+                                        }
+
+                                        @Html.ActionLink(Model.session.Fullname.Split(' ')[0], "Index", "Profile/Index", new { Model.session.Username }, new { @style = "color:white;font-weight:bold;font-size:12px;" })
+                                    </div>
+                                    <div class="main-nav-item">
+                                        <a style="color:white;font-weight:bold;font-size:12px;" href="/Home/Index">HomePage</a>
+                                    </div>
+                                    @if (Model.session.RoleId == 2)
+                                    {
+                                        <div class="main-nav-item">
+                                            <a style="color:white;font-weight:bold;font-size:12px;" href="/Admin/Index">AdminPage</a>
+                                        </div>
+                                    }
+                                    <div style="margin-top:-.5rem;padding-left:10px;">
+                                        <i data-toggle="popover" title="Notifications" style="margin-right:10px; color: #f5f6f7;" class="fas fa-bell fa-lg"> </i>
+                                        <a href="@Url.Action("LogOut", "Account")"><i style="color: #f5f6f7; " class="fas fa-sign-out-alt fa-lg"></i></a>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        
+
+        <div class="container-fluid page-main" style="height:auto">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="container" style="height:auto">
+                        @RenderBody()
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="chatContainer" style="">
+
+        </div>
+
+        <div id="chatTemplate" style="display:none">
+            <div class="chat-box" id="chatBox">
+
+                <div class="chat-head container">
+                    <div style="display: flex;align-items: center;margin-left:-10px;">
+                        <a href="#"> <img src="~/Content/images/userp.png" style="width:32px;height:32px" class="rounded-circle" /></a>
+                        <h6 id="chatTitle"></h6>
+                    </div>
+                    <button type="button" data-description="" class="ml-2 mb-1 close">&times;</button>
+                </div>
+
+                <div class="chat-body">
+                    <div class="msg-insert" id="msgInsert">
+                    </div>
+                    <div class="chat-text">
+                        <textarea onkeypress="keyPressArea()" placeholder="Send"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="templateToast" hidden>
+        <div class="toast" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">Toast Header</strong>
+                <small class="text-muted">5 mins ago</small>
+                <button type="button" data-description="" onclick="kapat(this);" class="ml-2 mb-1 close">&times;</button>
+            </div>
+            <div class="toast-body">
+                Some text inside the toast body
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/js/chatbox.js"></script>
+</body>
+</html>
+<script>
+
+    var toastTopPx = 55;
+    $(document).ready(function() {
+
+
+
+        @{
+            if (Model.friendReqNotifications != null)
+            {
+                foreach (var item in Model.friendReqNotifications)
+                {
+
+                    @: console.log("@item.Username");
+                    @: var templateRequest = $('#requestTemplate').children('div').attr('id', "req" + '@item.ID').find('p').html("@item.Fullname").parent().parent().css("display", "normal").html();
+                    @:
+                    @: $('#popover-content').prepend(templateRequest);
+                    @:
+                }
+            }
+        }
+
+    });
+
+    function kapat(obj) {
+        console.log($(obj));
+        console.log($(obj).data("description"));
+        console.log($(obj).parent().parent().remove());
+    };
+
+
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            placement: 'bottom',
+            html: true,
+            content: function () {
+                return $('#popover-content').html();
+            }
+        });
+    });
+
+
+</script>

@@ -1,0 +1,170 @@
+﻿
+.responsive {
+    width: 100%;
+    height: 420px;
+}
+
+.parallax {
+    background-image: url("https://images.unsplash.com/photo-1463412855783-af97e375664b?iq=100&fm=jpg&w=1000");
+    min-height: 205px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: -webkit-sticky;
+    position: sticky;
+    margin-top: -12px;
+    top: -450px;
+}
+
+.profile-buttons{
+    position:absolute;
+    right:0;
+    top:-60px;
+}
+
+    .profile-buttons button {
+        background-color: #f5f6f7;
+        color: #4b4f56;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+.session-btn-infotimeline {
+
+}
+
+.session-btn-update {
+
+}
+
+.other-btn-friend {
+    background-color: #0984e3 !important; 
+}
+
+.other-btn-waitReq {
+    background-color: #b2bec3 !important;
+}
+
+.other-btn-nofriend {
+    background-color: #e17055 !important;
+}
+
+.other-btn-friendReq {
+    background-color: #55efc4 !important;
+}
+
+
+.other-btn-message {
+   
+}
+
+.be-active {
+    box-shadow: 0px 2px 0px 0px #1da1f2;
+}
+
+    .be-active span {
+        color: #1e90ff !important;
+    }
+
+.sticky-top {
+    top: 50px !important;
+}
+
+.sticky-img {
+}
+
+.profile-nav-link {
+    margin-left: 10px;
+}
+
+.nav-link {
+  
+}
+
+.profile-username {
+    color: #008000;
+    display: block;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 250px;
+    font-weight: bold;
+    
+    font-size: 24px;
+}
+
+.profile-nav-link a {
+    font-weight: bold;
+    color: blue;
+    color: #365899 !important;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+}
+
+.profile-nav-link:hover {
+    background-color: #f5f6f7;
+}
+
+    .profile-nav-link:active {
+        color: #1da1f2;
+    }
+
+    .profile-nav-link:hover span {
+        color: #1da1f2;
+    }
+
+    
+
+.nav-follow-button {
+    border-radius: 22px;
+    color: #1da1f2;
+    border-color: #1da1f2;
+    font-weight: bold;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-size: 14px;
+}
+
+    .nav-follow-button:hover {
+        background-color: #1da0f24f;
+        color: #1da1f2;
+        ;
+    }
+
+    .nav-follow-button:focus {
+        box-shadow: 0 0 0 .2rem #1da0f24f !important;
+        background-color: #1da0f24f !important;
+        color: #1da1f2 !important;
+    }
+
+
+    .nav-follow-button:active {
+        color: #fff !important;
+        background-color: #1da1f2 !important;
+        border-color: #1da1f2 !important;
+    }
+
+
+
+#profileBody{
+    margin-top:10px;
+    margin-left:-17px;
+    margin-right:-17px;
+}
+
+.profileImage {
+    position: absolute;
+    margin-top: -200px;
+    background-color: DodgerBlue;
+    color: white;
+    padding: 86px 96px;
+    font-size: 28px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+    .profileImage:hover {
+        border: 3px solid #dddddd;
+    }

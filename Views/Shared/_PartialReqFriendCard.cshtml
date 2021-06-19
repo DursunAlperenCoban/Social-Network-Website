@@ -1,0 +1,42 @@
+﻿
+
+<div class="requestfriend-card">
+    <div class="reqfriend-head">
+        <p>Friend Requests</p>
+        <div>
+            <a href="#">See All</a>
+        </div>
+    </div>
+
+    <div class="reqfriend-container">
+        @foreach (var item in Model.friendReqNotifications)
+        {
+            <div class="reqfriend-item">
+                @if (@item.AvatarImgPath != null)
+                {
+                    <img src="~/Content/images/avatars/@item.AvatarImgPath" style="width:50px; height:50px;" />}
+                else
+                {
+                    <img src="~/Content/images/avatars/userp.png" style="width:50px; height:50px;" />
+                }
+                <div class="reqfrienditem-body">
+                    <div class="reqfrienditem-header">
+                        <a href="#">@item.Username</a>
+                    </div>
+                    <div class="reqfrienditem-buttons">
+                        <span>
+                           
+                            <a class="btn btn-light reqfrienditem-btn" href=@Url.Action("AcceptRequest", "Profile", new {userId = item.ID})>Accept</a>
+                        </span>
+                        <span>
+                            <button type="button" class="btn btn-light reqfrienditem-btn">Ignore</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+

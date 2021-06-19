@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ParlanceNet</title>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+    @Styles.Render("~/Content/Style.css")
+
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left-container">
+        <div class="left-box"><img src="~/Content//images/Parlancenet.png" alt=""></div>
+    </div>
+    <div class="right-container">
+        <div class="logo-mini">
+            <img src="~/Content//images/logo-mini.png" alt="">
+        </div>
+        <div class="right-box">
+            @Html.Partial("_Login")
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="sign-up-container">
+
+    <div class="sign-up-box">
+        <div class="left-item">
+            <i id="close-btn" class="far fa-times-circle"></i>
+        </div>
+        @Html.Partial("_Register")
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<footer>
+    <span>Parlance.Net- Cse5001 Web Programming Term Project </span>
+    <span class="right">
+        Copyright 2020-2021 by
+        Osman Can İskit, Dursun
+        Alperen Çoban
+    </span>
+</footer>
+<script src="~/Scripts/app.js"></script>
+</body>
+</html>

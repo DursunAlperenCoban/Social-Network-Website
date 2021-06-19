@@ -1,0 +1,22 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+@if (Model.friends != null)
+{
+    foreach (var friend in Model.friends)
+    {
+        var friendName = friend.Fullname;
+        <div class="chatuser-item" id="chatuser-@friend.ID" onclick="openChat('@friend.ID', '@friend.Fullname', this);">
+            @{
+                if (friend.AvatarImgPath != null)
+                {
+                    <img class="rounded-circle" width="32" height="32" src="~/Content/images/avatars/@friend.AvatarImgPath" alt="img" />
+                }
+                else
+                {
+                    <img class="rounded-circle" width="32" height="32" src="~/Content/images/userp.png" alt="img" />
+                }
+            }
+
+            <h6 style="font-size: 13px; margin-left: 5px;">@friend.Fullname</h6>
+        </div>
+    }
+}

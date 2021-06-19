@@ -1,0 +1,36 @@
+﻿@model ICollection<ParlanceNet.Models.Comment>
+
+
+@foreach (var comment in Model)
+{
+    if (comment.IsDeleted == false &&comment.User.IsDeleted==false)
+    {
+        <div class="postcomment-item">
+            <div class="commentitem-body" style="display: flex; align-items: flex-start; margin-top: 10px;">
+                <div>
+                    @{
+                        if (comment.User.AvatarImgPath != null)
+                        {
+                            <img style="width: 32px; height: 32px;" src="~/Content/images/avatars/@comment.User.AvatarImgPath" class="rounded-circle"/>
+                        }
+                        else
+                        {
+                            <img style="width: 32px; height: 32px;" src="~/Content/images/userp.png" class="rounded-circle"/>
+                        }
+                    }
+
+                </div>
+                <div>
+                    <div style="background-color: #f1f1f1; border-radius: 100px; font-size: 14px; color: black; margin-left: 10px; width: 100%; padding: 10px;">
+                        <a style="font-weight: bold; color: green;" href="#">@comment.User.Fullname</a>
+                        <span>@comment.Text</span>
+                    </div>
+                    <div class="commentitem-btns" style="font-size: 13px; margin-left: 15px">
+                        <a style="color: #7DCEA0; cursor: pointer" onclick="likeComment()">Like</a>
+                        <a style="color: #7DCEA0; cursor: pointer" href="#">Answer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

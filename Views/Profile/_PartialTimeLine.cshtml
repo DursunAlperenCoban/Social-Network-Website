@@ -1,0 +1,31 @@
+﻿@using System.Data.Entity.Infrastructure
+@model ParlanceNet.Models.ViewModels.GlobalViewModel
+<div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <div class="fbRequestFriendCard">
+                    @Html.Partial("_PartialUserFriendCard")
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            @if (Model.session.Username == Model.user.Username)//new
+            {
+                <div class="col-md-12">
+                    @Html.Partial("_PartialWhatsHappen")
+                </div>
+            }
+            <div class="col-md-12">
+                @Html.Partial("_PartialPost")
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>

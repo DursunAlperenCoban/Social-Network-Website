@@ -1,0 +1,55 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="main">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <div class="fbRequestFriendCard">
+                    @Html.Partial("_PartialUserFriendCard")
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div style="" class="contentArea">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="whatsHappen">
+                            @Html.Partial("_PartialWhatsHappen")
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="post">
+                            @Html.Partial("_PartialPost", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div style="" class="homeRightColumn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="fbRequestFriendCard">
+                            @Html.Partial("_PartialReqFriendCard")
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="egoFriendPanel">
+                            @Html.Partial("_PartialEgoFriend", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

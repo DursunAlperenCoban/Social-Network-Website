@@ -1,0 +1,74 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+
+
+<div class="requestfriend-card">
+    <div class="reqfriend-head">
+        <p>Also Known Person</p>
+        <div>
+            <a href="#">See All</a>
+        </div>
+    </div>
+    <div class="egofriend-container">
+        @if (Model.egoFriends != null)
+        {
+            foreach (var friend in Model.egoFriends)
+            {
+                <div class="egofriend-item">
+
+                    @{
+                        if (friend.AvatarImgPath != null)
+                        {
+                            <img src="~/Content/images/avatars/@friend.AvatarImgPath" style="width: 56px; height: 56px;" />
+
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/userp.png" style="width: 56px; height: 56px;" />
+                        }
+                    }
+                    <div class="egofrienditem-body">
+                        <div class="egofrienditem-header">
+                            <a style="font-weight: bold;" href="/@friend.Username">@friend.Fullname</a>
+                            <div>3 Common Friend</div>
+                        </div>
+                        <div class="egofrienditem-buttons">
+                            <span>
+                                <button type="button" onclick="sendRequest('@friend.ID', this)" class="btn btn-light reqfrienditem-btn">Add Friend</button>
+                            </span>
+                            <span>
+                                <button type="button" onclick="removeItem(this)" class="btn btn-light reqfrienditem-btn">Remove</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+<script>
+
+    function removeItem(thisis) {
+        $(thisis).parents('.egofriend-item').fadeOut();
+    };
+
+    function sendRequest(id, thisis) {
+        var data = { friendId: id };
+        $.ajax({
+            data: data,
+            method: 'post',
+            url: '/Home/SendFriendRequest',
+            success: function (response) {
+                if (response) {
+                    $(thisis).html("İstek Gönderildi!");
+                    $(thisis).parents('.egofriend-item').fadeOut();
+                }
+                else {
+                    //arkadaşlık isteği hatası
+                }
+            }
+        });
+    };
+
+</script>

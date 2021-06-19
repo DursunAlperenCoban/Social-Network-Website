@@ -1,0 +1,152 @@
+﻿@model ParlanceNet.Models.ViewModels.GlobalViewModel
+
+
+<div class="row">
+
+
+    @foreach (var post in Model.allPost)
+
+    {
+        <div class="col-md-12">
+            <div class="tweet" style="border-radius:8px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="tweet-header" style="display:flex">
+                                    <div style="text-align:center">
+                                        @{
+                                            if (post.User.AvatarImgPath != null)
+                                            {
+                                                <a href="@Url.Action("Index","Profile",new{username=post.User.Username})"> <img src="~/Content/images/avatars/@post.User.AvatarImgPath" width="40" height="40" class="rounded-circle" alt=""></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Index","Profile",new{username=post.User.Username})"> <img src="~/Content/images/userp.png" width="40" height="40" class="rounded-circle" alt=""></a>
+                                            }
+                                        }
+
+                                    </div>
+                                    <div style="display:grid;margin-left:15px;">
+                                        <a class="tweet-userinfo" href="@Url.Action("Index","Profile",new{username=post.User.Username})"><span style="color:#7dcea0;font-weight:bold;" class="tweet-fullname">@post.User.Fullname</span></a>
+                                        <small class="tweet-time">@post.CreatedOn</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="tweet-description">
+                                    <p>@post.Text</p>
+                                </div>
+                            </div>
+                            @{
+                                if (post.PostImgPath != " " && post.PostImgPath != null)
+                                {
+                                    <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+                                        <div class="tweet-img">
+
+                                            <a> <img src="~/Content/images/posts/@post.PostImgPath" style="width:100%; height: 285px; box-shadow:1px 1px 1px 1px grey"></a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+                            <div class="col-md-12" style="display:flex;margin-top:10px;">
+                                <div class="post-links" style="flex:1">
+                                    <div class="post-like-info">
+                                        <a>
+                                            <i id="post-@post.ID" style="color:green" class="far fa-thumbs-up">@post.Like.Where(l => l.IsDeleted == false).ToList().Count()</i>@*Fixed*@
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="post-comment-info">
+                                    @post.Comment.Where(c => c.IsDeleted == false).Select(c => c).ToList().Count() Comment@*Fixed*@
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <hr />
+                            </div>
+                            <div class="postfooter-btns col-md-12" style="">
+
+                                <div style="flex:1">
+                                    @{
+                                        if (post.Like.Any(l => l.OwnerID == Model.session.ID && l.IsDeleted == false))
+                                        {
+                                            <button id="likeBtn-@post.ID" style="" onclick="likePost(@post.ID)" type="button" class="btn btn-light like-btn">Like</button>
+                                        }
+                                        else
+                                        {
+                                            <button id="likeBtn-@post.ID" style="" onclick="likePost(@post.ID)" type="button" class="btn btn-light">Like</button>
+                                        }
+                                    }
+
+                                </div>
+                                <div style="flex:1">
+                                    <button style="" type="button" class="btn btn-light reqfrienditem-btn">Add Comment</button>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-md-12">
+                                <div style="background:white;display:flex;padding:20px 10px 0 0;align-items:center">
+                                    <a href="#"> <img class="rounded-circle" src="~/Content/images/userp.png" height="32" width="32" /></a>
+                                    <textarea onkeyup="enterComment('@post.ID',this)" value="" id="newCommentText" placeholder="Write Comment..." style="border:none;resize:none" class="form-control" rows="1"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="postcomment-container-@post.ID col-md-12">
+                                @Html.Partial("_PartialComment", post.Comment)
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+
+    function enterComment(id, thisis) {
+        if (event.keyCode == 13) {
+
+            var data = { postId: id, comment: thisis.value };
+            thisis.value = "";
+            $.ajax({
+                data: data,
+                method: "post",
+                url: "/Home/SendComment",
+                success: function (response) {
+                    if (response != false) {
+                        $("#postcomment-container-" + id).html(response);
+                    }
+                    else {
+
+                    }
+                }
+            });
+        }
+    }
+
+
+    function likePost(postId) {
+        //console.log(tweetId)
+        var data = { postId: postId }
+        $.ajax({
+            data: data,
+            method: "post",
+            url: "/Home/LikePost",
+            success: function (response) {
+                console.log(response.likeCount);
+                $("#post-" + postId).html(response.likeCount);
+                $("#likeBtn-" + postId).toggleClass("like-btn");
+                // $('#' + tweetId).removeClass(f)
+            }
+        })
+    }
+</script>
